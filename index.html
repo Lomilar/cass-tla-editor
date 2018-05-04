@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="ADL TLA Competency Editor">
+    <meta name="application-name" content="ADL TLA Competency Editor">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADL TLA Competency Editor</title>
+    <style inherit="true">
+        body {
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+            margin: 0px;
+        }
+        
+        .topband {
+            height: 42px;
+            background-color: #1c3664;
+        }
+        
+        .header {
+            background-color: #069;
+            color: #eee;
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        .header h1 {
+            padding-left: 1rem;
+            padding-top: .25rem;
+            padding-bottom: .25rem;
+            margin: 0px;
+        }
+        
+        .iframe {
+            width: 100vw;
+            height: calc(100vh - 12rem);
+            border: 0px;
+            margin-top: .25rem;
+        }
+        
+        #header {
+            background-color: rgba(0, 102, 153, 0.8);
+            color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="topband"></div>
+        <h1><img src="img/ADL_Logo.png"> Total Learning Architecture - Competency Framework Editor<span style="float:right;font-size:xx-small"> Psst, the TLA needs a logo.</span></h1>
+    </header>
+    <iframe class="iframe">
+    </iframe>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script>
+        $("iframe").ready(function() {
+            $(window).on("message", function(event) {
+                if (event.originalEvent.data.message == "waiting") {
+                    //Identity
+                    $("iframe")[0].contentWindow.postMessage(JSON.stringify({
+                        action: "identity",
+                        identity: "-----BEGIN RSA PRIVATE KEY-----MIIEowIBAAKCAQEAqRAAHKJT8ohJW5mNp6fSuXUEB1DW3wikE45hGg3pGz7tJpiCuolckl696VXbyztiPxK9kaEp1CbSGbnr/oZ9iAY9LcLXcix8Bx4n67LrbvHi3B56tehPuKK8dxSKbQSn5HuhH/hKsBo9Nhc7Azg735wpKJCBwgK6EiPsrFSOeSbc/Q2TpxmO6pVAl1Xu0z/F+lCgsxrKGKJHTY/XtgKUTClkF4/6otCtsAM0FS80f1XC01HVhkaf/ID07SHpshQw3W/LrT6HbnAUz6/gVj8uLvZihC5oGafG4M0B3WzBSDqwLRtcHqWiIrZ4pB7HUZ7Xvr5ciLSgJdsIURd3iMRS0QIDAQABAoIBAQCZ6jA/4WVN69flZfG6Dibhou/M/ULyALrn9vreLoXnwS1EsxppWv8FXu3FDd6xstmqFJSzjac4NzOWKlb4/VYxzYRLMhTVJDyyejjb86M1+U+RGMqc6+gQb0/nlbLEt7VmZUt2gKT2mJzbruCR+NNBq7ko7g7EI5llRIGHDuA62LM0Y17iQM2Ep8RdvE4xBcigckOE781XDfmYgYn8TUbw0yDjKY5oaS7DBYLfbnuM9Z4aPGmN7ahCmerk/pP05t86G9ePXx+MWE/I+z7/RSynxglHE6DU/Gwl1IrvKXEFqvEIv22NlXu8vEcYJdQjIHKXuvwc091aUpzcWf/g28ZxAoGBAOW0v8fZ/Y30u5RMHJ6TR3Od1H1WmFgv3DcA6OoZw5C4ue8NVm1n26+BmXUYfYEkHPDg6npS0gd3EKCVdnzzyJJYv41dmKWsW9NwAVl1Px9UB+/532wrrI+tCrYNgpPuAzhWWB2GK6gojE4aKxbL2KTPfFo1LdA90IYwJnnQ8IzFAoGBALxqKtSlUuPvxgazC6T3gXtHqtMVPJReLThm3ObvT7zezMQ/dOfce8lOnO8CCwOoYSbVTFkBzJZJ/LZT6c5tBwZEAcvzxjQWwDkUJ145GU3rQ0tVAsUpVjGEGioxLnqR/ZoNvaB12vOlyQb2p7kMV8FYCWLr/47dMuQP8mJyAeadAoGAIrBWGe8wnERuI2oPFF93dd1K3pa6MO8hWWkYw2man/tVkOU5vRHnGiz/KLDHGz6B5FqC7nAdaaUwbJ/Fof8KthcS7l1JFRPfViHfAkxzeN6uyC268NHzoEroiC+oHYDfGZ3odqTxaNaewZiwEyQ7lkADLnhDb+Q13l3dIZ5NBWUCgYBpKkklz/FoUJkTfDRvq8aV7PaoQx5BIh/Tb3a1X7X+Ec3xbAnwsNxXDI4Dyfwj2oP/jObEd4CeEkX/7u59zdUx5huqnzJuOJSqR1mB+hTprPsuvRCCxAPcN4PzMOhkecA3kJvbSG0hudNvE5WicAU7Ycw7bsaCE20oZs4/rKrq8QKBgDCepCCUBxQPI5RwrXRKrzBUS49eJiOYFf5ns3hG3F+HiJ5i7gu/nEZ0v3T0x18YT2oiV44cCqf2qVs9Z6X/92xtF34gJCg1R4N1YBghB6SERaRyOfI1vXyh18FZvJlES5SZV44kWRgVM9CrHzOPexP0+2vL+jmHSVDfmRL7fxpa-----END RSA PRIVATE KEY-----"
+                    }), window.location.origin);
+                };
+            });
+        });
+        $("iframe").attr("src", "cass-editor/index.html?user=wait&link=true&server=https://cass.tla.cassproject.org/api/&origin=" + window.location.origin);
+    </script>
+</body>
+
+</html>
